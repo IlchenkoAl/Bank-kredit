@@ -1,0 +1,108 @@
+{
+    "_id": {
+        "$oid": "65a6d14f7e376a56ff8546bd"
+    },
+    "component": "div",
+    "props": {
+        "className": "Calc1"
+    },
+    "children": [
+        {
+            "component": "h3",
+            "children": "Калькулятор ипотеки"
+        },
+        {
+            "component": "p",
+            "children": "Годовая ставка по ипотеке - 9,6%"
+        },
+        {
+            "component": "div",
+            "props": {
+                "className": "kredit"
+            },
+            "children": {
+                "component": "h3",
+                "children": "Сумма ипотеки (в рублях)"
+            }
+        },
+        {
+            "component": "div",
+            "props": {
+                "className": "div2"
+            },
+            "children": {
+                "component": "input",
+                "props": {
+                    "type": "number",
+                    "onChange": "{(e) => setCost(e.target.value)}"
+                }
+            }
+        }
+    ],
+    "children1": [
+        {
+            "component": "h3",
+            "children": "Калькулятор ипотеки"
+        },
+        {
+            "component": "p",
+            "children": "Годовая ставка по ипотеке - 9,6%"
+        },
+        {
+            "component": "div",
+            "props": {
+                "className": "kredit"
+            },
+            "children": {
+                "component": "h3",
+                "children": "Сумма ипотеки (в рублях)"
+            }
+        },
+        {
+            "component": "div",
+            "props": {
+                "className": "div2"
+            },
+            "children": {
+                "component": "input",
+                "props": {
+                    "type": "number",
+                    "onChange": "{(e) => setCost(e.target.value)}"
+                }
+            }
+        }
+    ],
+    "children2": [
+        {
+            "component": "h3",
+            "children": "Калькулятор ипотеки"
+        },
+        {
+            "component": "p",
+            "children": "Годовая ставка по ипотеке - 9,6%"
+        },
+        {
+            "component": "div",
+            "props": {
+                "className": "kredit"
+            },
+            "children": {
+                "component": "h3",
+                "children": "Сумма ипотеки (в рублях)"
+            }
+        },
+        {
+            "component": "div",
+            "props": {
+                "className": "div2"
+            },
+            "children": {
+                "component": "input",
+                "props": {
+                    "type": "number",
+                    "onChange": "{(e) => setCost(e.target.value)}"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Ruda:wght@400..900&display=swap");
+
+.Header {
+  text-align: center;
+  font-family: "Ruda", sans-serif;
+  font-style: normal;
+  margin: 25px 24px;
+}
+
+.Header h1 {
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  font-weight: 700;
+}
