@@ -27,9 +27,11 @@ function App() {
     <div className="App">
       <Header />
       <div className="calculator-buttons">
-        <button onClick={() => setActiveCalculator("Calc1")}>Первый калькулятор</button>
-        <button onClick={() => setActiveCalculator("Calc2")}>Второй калькулятор</button>
-        <button onClick={() => setActiveCalculator("Calc3")}>Третий калькулятор</button>
+        <button className="link-button" onClick={() => setActiveCalculator("Calc1")}>Ипотека</button>
+        <div className="line-between"></div>
+        <button className="link-button" onClick={() => setActiveCalculator("Calc2")}>Автокредитование</button>
+        <div className="line-between"></div>
+        <button className="link-button" onClick={() => setActiveCalculator("Calc3")}>Потребительский кредит</button>
       </div>
       {renderCalculator()}
       <Router>

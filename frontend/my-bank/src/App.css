@@ -1,69 +1,160 @@
 * {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-size: 24px;
 }
 
 .Calc {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100vh; /* Занимает всю высоту экрана */
+    height: 100%; 
+    margin-top: 5%;
 }
 
 .data-section-input,
 .data-section-output {
     flex: 1;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .data-section-input {
-    border-right: 1px solid #ddd; /* Линия разделения между секциями */
+    border-right: 2px dotted #ddd; /* Линия разделения между секциями */
+    padding: 1%;
 }
 
-.data-section-output {
-    padding: 20px; /* Добавляет отступ для содержимого */
+
+/* Цвета */
+.title{
+    font-weight: normal;
+    color: #606060;
 }
 
+.blue{
+    background-color: #e0efff;
+}
+.grey{
+    background-color: #f6f6f6;
+}
+.value{
+    &-from-cost{
+        color: #808080;
+        font-weight: 100;
+    }
+    &-to-cost{
+        color: #808080;
+        font-weight: 100;
+    }
+}
+
+
+
+/* Центрирование всех инпутов по горизонтали */
+input[type="number"] {
+    display: block; 
+    width: 100%; 
+    margin: 0 auto; 
+    text-align: center; 
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    font-size: 48px;
+    border: none;
+}
+
+/* Применяется только для инпутов типа range */
 input[type="range"] {
-    width: 100%; /* Устанавливает ширину слайдера на 100% родительского контейнера */
-    margin: 0;
-    -webkit-appearance: none; /* Убирает стандартный стиль в Webkit браузерах */
-    background: transparent; /* Убирает стандартный фон */
-    position: relative; /* Относительное позиционирование для более точного контроля */
+    width: 100% ; /* Ширина слайдера с учетом отступов */
+    margin: 0 auto; /* Центрирование по горизонтали */
+    -webkit-appearance: none; 
+    background: transparent; 
+    position: relative; 
+    margin: 2em;
 }
 
+/* Ползунок слайдера */
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Убирает стандартный стиль ползунка */
-    width: 26px; /* Ширина ползунка */
-    height: 26px; /* Высота ползунка */
-    background: #548FD4; /* Цвет ползунка */
-    cursor: pointer; /* Курсор при наведении */
-    border-radius: 50%; /* Делает ползунок круглым */
-    position: relative; /* Относительное позиционирование для контроля */
-    margin-top: -9px; /* Сдвигает ползунок вверх, чтобы он оказался в центре трека */
+    -webkit-appearance: none; 
+    width: 26px; 
+    height: 26px; 
+    background: #548FD4; 
+    cursor: pointer; 
+    border-radius: 50%; 
+    position: relative; 
+    margin-top: -9px; 
 }
 
+/* Трек слайдера */
 input[type="range"]::-webkit-slider-runnable-track {
-    width: 100%; /* Ширина трека */
-    height: 8px; /* Высота трека */
-    background: #F0F0F0; /* Цвет трека */
-    border-radius: 5px; /* Скругление углов трека */
+    width: 100%; 
+    height: 8px; 
+    background: #F0F0F0; 
+    border-radius: 5px; 
+}
+
+/* Обеспечивает правильное выравнивание элементов внутри контейнера */
+.div2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
 }
 
 .value-cost {
     display: flex;
-    justify-content: space-between; /* Размещает элементы по краям */
-    align-items: center; /* Выравнивает элементы по центру по вертикали */
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+}
+
+.info-value{
+    width: 50%;
+    height: 25%;
+    padding: 10px;
+    text-align: center;
+}
+
+.info-value-block{
+    display: flex;
+    padding-bottom: 5%;
+    gap: 5%;
+    justify-content: space-between;
+    margin-top: 8em;
 }
 
 .styleButton {
     padding: 10px 20px;
     border: none;
-    background-color: #548FD4;
-    color: #fff;
+    border: 2px solid #548FD4;
+    background-color: #ffffff;
+    color: #000000;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 32px;
+    width: 100%;
+    height: 80px;
+}
+
+.calculator-buttons{
+    display: flex;
+    padding: 0px 25%;
+    justify-content: space-between;
+}
+
+.line-between{
+    width: 1px;
+    height: 50px;
+    background-color: #548FD4;
+}
+
+.link-button{
+    color: #2c629f;
+    background-color: #fff;
+    text-decoration: underline;
+    border: none;
+    cursor: pointer;
+
 }

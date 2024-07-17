@@ -2,13 +2,14 @@
 
 .Header {
   text-align: center;
-  font-family: "Ruda", sans-serif;
+  font-family: Helvetica;
   font-style: normal;
-  margin: 25px 24px;
+  margin: 50px 25px;
 }
 
 .Header h1 {
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
   font-weight: 700;
+  font-size: 42px;
 }

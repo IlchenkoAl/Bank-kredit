@@ -40,16 +40,12 @@ function Calc1() {
   return (
     <div className="Calc">
       <div className="data-section-input">
-        <h3>Калькулятор ипотеки</h3>
-        <p>Годовая ставка по ипотеке - 9,6%</p>
         <div className="kredit">
-          <h3>
-            Сумма ипотеки <br />
-            (в рублях)
+          <h3 className="title">
+            Сумма ипотеки
           </h3>
         </div>
         <div className="div2">
-          <div>
             <input className="mortgage-amount"
               type="range"
               min="0"
@@ -62,18 +58,15 @@ function Calc1() {
               <p className="value-from-cost">0 ₽</p>
               <p className="value-to-cost">{MAX_COST} ₽</p>
             </div>
-          </div>
           <input
             type="number"
             value={cost}
             onChange={(e) => setCost(Number(e.target.value))}
           />
-          <p>{cost} рублей</p>
         </div>
         <div className="kredit">
-          <h3>
-            Срок кредита <br />
-            (в годах)
+          <h3 className="title">
+            Срок кредита 
           </h3>
         </div>
         <div className="div2">
@@ -85,6 +78,10 @@ function Calc1() {
             onChange={(e) => setTerm(Number(e.target.value))}
             step="1"
           />
+          <div className="value-cost">
+             <p className="value-from-cost">0 Лет</p>
+            <p className="value-to-cost">30 Лет</p>
+          </div>
           <input
             type="number"
             min="1"
@@ -92,16 +89,16 @@ function Calc1() {
             value={term}
             onChange={(e) => setTerm(Number(e.target.value))}
           />
+          <div>
+            <h3>9,6%</h3>
+        </div>
         </div>
       </div>
       <div className="data-section-output">
         <div className="kredit">
-          <h3>Ежемесячный платеж</h3>
           <div className="kredit">
-          <h3>
-            Первоначальный <br />
-            взнос <br />
-            (в рублях)
+          <h3 className="title">
+            Первоначальный взнос 
           </h3>
         </div>
         <div className="div2">
@@ -110,11 +107,15 @@ function Calc1() {
             value={initialPayment}
             onChange={(e) => setInitialPayment(Number(e.target.value))}
           />
-          <p>{initialPayment} рублей</p>
         </div>
-          <p>
-            {monthlyPayment} рублей и Общая сумма ипотеки: {totalPayment} рублей
-          </p>
+        <div className="info-value-block">
+          <div className="info-value grey">
+              Ежемесячный платеж <br /> {monthlyPayment} ₽
+          </div>
+          <div className="info-value blue">
+              Переплата <br /> {totalPayment} ₽
+          </div>
+        </div>
           <button className="styleButton" onClick={handleCalculate}>
           Рассчитать
         </button>

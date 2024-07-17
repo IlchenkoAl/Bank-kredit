@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../App.css"
 
 function calculateMortgage(cost, initialPayment, term) {
-  const annualRate = 3.5;
+  const annualRate = 9.6;
   const loanAmount = cost - initialPayment;
   const monthlyRate = annualRate / 12 / 100;
   const totalRate = Math.pow(1 + monthlyRate, term * 12);
@@ -33,104 +33,92 @@ function Calc2() {
     setMonthlyPayment(monthlyPayment);
     setTotalPayment(totalPayment);
     console.log(`Рассчитанный ежемесячный платёж: ${monthlyPayment}
-        и Общая сумма автокредитования ${totalPayment}`);
+        и Общая сумма ипотеки ${totalPayment}`);
   };
 
   return (
     <div className="Calc">
-      <h3>Калькулятор автокредитования</h3>
-      <p>Годовая ставка по автокредиту - 3,5%</p>
-      <div className="kredit">
-        <h3>
-          Сумма автокредитования <br />
-          (в рублях)
-        </h3>
-      </div>
-      <div className="div2">
-        <div className="mortgage-amount">
+      <div className="data-section-input">
+        <div className="kredit">
+          <h3 className="title">
+            Сумма ипотеки
+          </h3>
+        </div>
+        <div className="div2">
+            <input className="mortgage-amount"
+              type="range"
+              min="0"
+              max={MAX_COST}
+              value={cost}
+              onChange={(e) => setCost(Number(e.target.value))}
+              step="1000"
+            />
+            <div className="value-cost">
+              <p className="value-from-cost">0 ₽</p>
+              <p className="value-to-cost">{MAX_COST} ₽</p>
+            </div>
           <input
-            className="mortgage-amount"
-            type="range"
-            min="0"
-            max={MAX_COST}
+            type="number"
             value={cost}
             onChange={(e) => setCost(Number(e.target.value))}
-            step="1000"
           />
-          <div className="value-cost">
-            <p className="value-from-cost">0 ₽</p>
-            <p className="value-to-cost">{MAX_COST} ₽</p>
-          </div>
         </div>
-        <input
-          type="number"
-          value={cost}
-          onChange={(e) => setCost(Number(e.target.value))}
-        />
-        <p>{cost} рублей</p>
-      </div>
-      <div className="kredit">
-        <h3>
-          Первоначальный <br />
-          взнос <br />
-          (в рублях)
-        </h3>
-      </div>
-      <div className="div2">
-        <div className="mortgage-amount">
+        <div className="kredit">
+          <h3 className="title">
+            Срок кредита 
+          </h3>
+        </div>
+        <div className="div2">
           <input
             type="range"
-            min="0"
-            max={cost}
-            value={initialPayment}
-            onChange={(e) => setInitialPayment(Number(e.target.value))}
-            step="1000"
+            min="1"
+            max="30"
+            value={term}
+            onChange={(e) => setTerm(Number(e.target.value))}
+            step="1"
           />
           <div className="value-cost">
-            <p className="value-from-cost">0 ₽</p>
-            <p className="value-to-cost">{cost} ₽</p>
+             <p className="value-from-cost">0 Лет</p>
+            <p className="value-to-cost">30 Лет</p>
+          </div>
+          <input
+            type="number"
+            min="1"
+            max="30"
+            value={term}
+            onChange={(e) => setTerm(Number(e.target.value))}
+          />
+          <div>
+            <h3>9,6%</h3>
+        </div>
+        </div>
+      </div>
+      <div className="data-section-output">
+        <div className="kredit">
+          <div className="kredit">
+          <h3 className="title">
+            Первоначальный взнос 
+          </h3>
+        </div>
+        <div className="div2">
+          <input
+            type="number"
+            value={initialPayment}
+            onChange={(e) => setInitialPayment(Number(e.target.value))}
+          />
+        </div>
+        <div className="info-value-block">
+          <div className="info-value grey">
+              Ежемесячный платеж <br /> {monthlyPayment} ₽
+          </div>
+          <div className="info-value blue">
+              Переплата <br /> {totalPayment} ₽
           </div>
         </div>
-        <input
-          type="number"
-          value={initialPayment}
-          onChange={(e) => setInitialPayment(Number(e.target.value))}
-        />
-        <p>{initialPayment} рублей</p>
-      </div>
-      <div className="kredit">
-        <h3>
-          Срок кредита <br />
-          (в годах)
-        </h3>
-      </div>
-      <div className="div2">
-        <input
-          type="range"
-          min="1"
-          max="30"
-          value={term}
-          onChange={(e) => setTerm(Number(e.target.value))}
-          step="1"
-        />
-        <input
-          type="number"
-          min="1"
-          max="30"
-          value={term}
-          onChange={(e) => setTerm(Number(e.target.value))}
-        />
-      </div>
-      <button className="styleButton" onClick={handleCalculate}>
-        Рассчитать
-      </button>
-
-      <div className="kredit">
-        <h3>Ежемесячный платеж</h3>
-        <p>
-          {monthlyPayment} рублей и Общая сумма автокредитования: {totalPayment}{" "}
-          рублей
-        </p>
+          <button className="styleButton" onClick={handleCalculate}>
+          Рассчитать
+        </button>
+        </div>
       </div>
     </div>
   );
