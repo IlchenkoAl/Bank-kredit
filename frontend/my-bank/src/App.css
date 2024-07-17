@@ -28,6 +28,10 @@
 }
 
 
+h3{
+    font-size: 28px;
+}
+
 /* Цвета */
 .title{
     font-weight: normal;
@@ -157,4 +161,9 @@ input[type="range"]::-webkit-slider-runnable-track {
     border: none;
     cursor: pointer;
 
+}
+.head-output{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px 0px 0px;
 }

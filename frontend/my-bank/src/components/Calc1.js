@@ -90,17 +90,17 @@ function Calc1() {
             onChange={(e) => setTerm(Number(e.target.value))}
           />
           <div>
-            <h3>9,6%</h3>
         </div>
         </div>
       </div>
       <div className="data-section-output">
         <div className="kredit">
-          <div className="kredit">
-          <h3 className="title">
-            Первоначальный взнос 
-          </h3>
-        </div>
+          <div className="kredit head-output">
+            <h3 className="title">
+              Первоначальный взнос 
+            </h3>
+            <h3>9,6%</h3>
+          </div>
         <div className="div2">
           <input
             type="number"

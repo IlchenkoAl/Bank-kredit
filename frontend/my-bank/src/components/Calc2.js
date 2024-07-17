@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../App.css"
 
 function calculateMortgage(cost, initialPayment, term) {
-  const annualRate = 9.6;
+  const annualRate = 3.5;
   const loanAmount = cost - initialPayment;
   const monthlyRate = annualRate / 12 / 100;
   const totalRate = Math.pow(1 + monthlyRate, term * 12);
@@ -89,16 +89,16 @@ function Calc2() {
             onChange={(e) => setTerm(Number(e.target.value))}
           />
           <div>
-            <h3>9,6%</h3>
         </div>
         </div>
       </div>
       <div className="data-section-output">
         <div className="kredit">
-          <div className="kredit">
+          <div className="kredit head-output">
           <h3 className="title">
             Первоначальный взнос 
           </h3>
+          <h3>3,5%</h3>
         </div>
         <div className="div2">
           <input
