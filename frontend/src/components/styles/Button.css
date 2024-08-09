@@ -1,0 +1,30 @@
+.styleButton {
+    padding: 10px 20px;
+    border: 2px solid #548FD4;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 32px;
+    width: 100%;
+    height: 80px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.styleButton:hover {
+    background-color: #548FD4;
+    color: #ffffff;
+}
+
+.styleButton:active {
+    background-color: #2c3e50;
+    border-color: #2c3e50;
+    color: #ffffff;
+}
+
+.styleButton:disabled {
+    background-color: #ccc;
+    color: #666;
+    border-color: #aaa;
+    cursor: not-allowed;
+}

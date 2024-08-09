@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../App.css"
+import "./../styles/App.css";
 
 function calculateMortgage(cost, initialPayment, term) {
   const annualRate = 14.5;
@@ -96,7 +96,7 @@ function Calc3() {
       <div className="kredit">
         <div className="kredit head-output">
         <h3 className="title">
-          Первоначальный взнос 
+          Первоначальный взнос
         </h3>
         <h3>14,5%</h3>
       </div>

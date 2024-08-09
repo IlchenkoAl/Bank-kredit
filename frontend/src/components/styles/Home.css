@@ -1,0 +1,37 @@
+.Home {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.calculator-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.link-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.link-button:hover {
+    background-color: #2980b9;
+}
+
+.line-between {
+    width: 1px;
+    background-color: #ecf0f1;
+    margin: 0 10px;
+}
+
+.calculator-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

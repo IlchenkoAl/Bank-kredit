@@ -1,0 +1,173 @@
+/* Общие стили для всего документа */
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 24px;
+}
+
+/* Основной контейнер для компонента Calc */
+.Calc {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin-top: 5%;
+}
+
+/* Секции ввода и вывода данных */
+.data-section-input,
+.data-section-output {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.data-section-input {
+    border-right: 2px dotted #ddd; /* Линия разделения между секциями */
+    padding: 1%;
+}
+
+/* Заголовки секций */
+h3 {
+    font-size: 28px;
+}
+
+/* Цвета для заголовков */
+.title {
+    font-weight: normal;
+    color: #606060;
+}
+
+/* Цвета для блоков */
+.blue {
+    background-color: #e0efff;
+}
+
+.grey {
+    background-color: #f6f6f6;
+}
+
+/* Стили для значений диапазона */
+.value {
+    &-from-cost,
+    &-to-cost {
+        color: #808080;
+        font-weight: 100;
+    }
+}
+
+/* Стили для input[type="number"] */
+input[type="number"] {
+    display: block;
+    width: 100%;
+    margin: 0.8em auto;
+    text-align: center;
+    font-size: 48px;
+    border: none;
+}
+
+/* Стили для input[type="range"] */
+input[type="range"] {
+    width: 100%;
+    margin: 2em auto;
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+/* Ползунок слайдера */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 26px;
+    height: 26px;
+    background: #548FD4;
+    cursor: pointer;
+    border-radius: 50%;
+    position: relative;
+    margin-top: -9px;
+}
+
+/* Трек слайдера */
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    background: #F0F0F0;
+    border-radius: 5px;
+}
+
+/* Контейнер для правильного выравнивания элементов */
+.div2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Контейнер для значений стоимости */
+.value-cost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Стили для блоков информации */
+.info-value {
+    width: 50%;
+    height: 100px;
+    padding: 10px;
+    text-align: center;
+}
+
+.info-value-block {
+    display: flex;
+    padding-bottom: 5%;
+    gap: 5%;
+    justify-content: space-between;
+    margin-top: 8em;
+}
+
+/* Стили для кнопки расчета */
+.styleButton {
+    padding: 10px 20px;
+    border: 2px solid #548FD4;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+    width: 100%;
+    height: 80px;
+}
+
+/* Контейнер для кнопок переключения калькуляторов */
+.calculator-buttons {
+    display: flex;
+    padding: 0 25%;
+    justify-content: space-between;
+}
+
+/* Линия между кнопками */
+.line-between {
+    width: 1px;
+    height: 50px;
+    background-color: #548FD4;
+}
+
+/* Стили для кнопок переключения */
+.link-button {
+    color: #2c629f;
+    background-color: #fff;
+    text-decoration: underline;
+    border: none;
+    cursor: pointer;
+}
+
+/* Стили для заголовка и вывода */
+.head-output {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+}
