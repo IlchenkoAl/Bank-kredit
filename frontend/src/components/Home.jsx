@@ -1,33 +1,46 @@
 import React, { useState } from "react";
-import Calc1 from "./calculators/Calc1";
-import Calc2 from "./calculators/Calc2";
-import Calc3 from "./calculators/Calc3";
+import Calculator from "./calculators/Calculator";
 import './styles/Home.css';
 
 function Home() {
-    const [activeCalculator, setActiveCalculator] = useState("Calc1");
+    const [activeCalculator, setActiveCalculator] = useState("mortgage");
 
     const renderCalculator = () => {
         switch (activeCalculator) {
-            case "Calc1":
-                return <Calc1 />;
-            case "Calc2":
-                return <Calc2 />;
-            case "Calc3":
-                return <Calc3 />;
+            case "mortgage":
+                return <Calculator interestRate={9.6} loanType="ипотеку" />;
+            case "car":
+                return <Calculator interestRate={3.5} loanType="автокредит" />;
+            case "consumer":
+                return <Calculator interestRate={14.5} loanType="потребительский кредит" />;
             default:
-                return <Calc1 />;
+                return <Calculator interestRate={9.6} loanType="ипотеку" />;
         }
     };
 
     return (
         <div className="Home">
             <div className="calculator-buttons">
-                <button className="link-button" onClick={() => setActiveCalculator("Calc1")}>Ипотека</button>
+                <button
+                    className={`link-button ${activeCalculator === "mortgage" ? "active" : ""}`}
+                    onClick={() => setActiveCalculator("mortgage")}
+                >
+                    Ипотека
+                </button>
                 <div className="line-between"></div>
-                <button className="link-button" onClick={() => setActiveCalculator("Calc2")}>Автокредитование</button>
+                <button
+                    className={`link-button ${activeCalculator === "car" ? "active" : ""}`}
+                    onClick={() => setActiveCalculator("car")}
+                >
+                    Автокредитование
+                </button>
                 <div className="line-between"></div>
-                <button className="link-button" onClick={() => setActiveCalculator("Calc3")}>Потребительский кредит</button>
+                <button
+                    className={`link-button ${activeCalculator === "consumer" ? "active" : ""}`}
+                    onClick={() => setActiveCalculator("consumer")}
+                >
+                    Потребительский кредит
+                </button>
             </div>
             <div className="calculator-display">
                 {renderCalculator()}

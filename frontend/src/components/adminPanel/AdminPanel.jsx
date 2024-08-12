@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Calc1 from "../calculators/Calc1";
+import Calc1 from "../calculators/Calculator";
 import Calc2 from "../calculators/Calc2";
 import Calc3 from "../calculators/Calc3";
 import "./../styles/AdminPanel1.css";
