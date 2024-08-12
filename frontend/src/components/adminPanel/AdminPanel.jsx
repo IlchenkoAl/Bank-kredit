@@ -3,6 +3,7 @@ import Calc1 from "../calculators/Calc1";
 import Calc2 from "../calculators/Calc2";
 import Calc3 from "../calculators/Calc3";
 import "./../styles/AdminPanel1.css";
+import axios from "axios";
 
 function AdminPanel() {
   const initialCalculators = JSON.parse(
@@ -32,6 +33,15 @@ function AdminPanel() {
     updatedCalculators.splice(position, 0, newCalculator);
     setCalculators(updatedCalculators);
   };
+  const exportCalculations = async () => {
+    const response = await axios.get('/api/admin/export');
+    const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'calculations.csv';
+    link.click();
+  };
+
 
   const deleteCalculator = (id) => {
     const updatedCalculators = calculators.filter((calc) => calc.id !== id);
@@ -79,7 +89,7 @@ function AdminPanel() {
                   onChange={(e) => changeRate(calc.id, Number(e.target.value))}
                   placeholder="New Rate"
               />
-              <input type="text" placeholder="New Name" />
+              <input type="text" placeholder="New Name"/>
               <button
                   onClick={(e) => changeName(calc.id, e.target.previousSibling.value)}
               >
@@ -103,6 +113,8 @@ function AdminPanel() {
             placeholder="Position"
         />
         <button onClick={addCalculator}>Add Calculator</button>
+        <button onClick={exportCalculations}>Экспортировать результаты расчетов</button>
+
       </div>
   );
 }

@@ -1,7 +1,7 @@
 form {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  max-width: 500px;
   margin: 50px auto;
   padding: 20px;
   border: 1px solid #ddd;
@@ -17,6 +17,7 @@ label {
 input[type="text"],
 input[type="password"] {
   padding: 8px;
+  width: 100%;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;

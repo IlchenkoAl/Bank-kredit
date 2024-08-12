@@ -171,3 +171,26 @@ input[type="range"]::-webkit-slider-runnable-track {
     justify-content: space-between;
     padding-right: 10px;
 }
+/* Пример медиазапроса для мобильных устройств */
+@media (max-width: 768px) {
+    .Calc {
+        flex-direction: column;
+        margin-top: 10%;
+    }
+
+    .data-section-input, .data-section-output {
+        padding: 10px;
+        width: 100%;
+    }
+
+    input[type="number"], input[type="range"] {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .styleButton {
+        font-size: 24px;
+        height: 60px;
+    }
+}
+
