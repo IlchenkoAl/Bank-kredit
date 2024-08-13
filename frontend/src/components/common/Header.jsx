@@ -11,7 +11,8 @@ function Header() {
     return (
         <div className="Header-container">
             <div className="Header">
-                <Link to="/">Главная</Link>
+                <Link to="/" style={{marginRight: '20px'}}>Главная</Link><hr/>
+                <Link to="/admin">Админ панель</Link>
                 <h1>Калькулятор финансов</h1>
                 {user ?
                     <button style={{padding: '10px'}} onClick={()=> dispatch(logoutUser())}>Выйти</button>

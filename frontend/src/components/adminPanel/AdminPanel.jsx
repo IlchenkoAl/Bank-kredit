@@ -1,122 +1,57 @@
-import React, { useState, useEffect } from "react";
-import Calc1 from "../calculators/Calculator";
-import Calc2 from "../calculators/Calc2";
-import Calc3 from "../calculators/Calc3";
-import "./../styles/AdminPanel1.css";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function AdminPanel() {
-  const initialCalculators = JSON.parse(
-      localStorage.getItem("calculators")
-  ) || [
-    { id: 1, component: "Calc1", name: "Calculator 1", rate: 0 },
-    { id: 2, component: "Calc2", name: "Calculator 2", rate: 0 },
-    { id: 3, component: "Calc3", name: "Calculator 3", rate: 0 },
-  ];
-  const [calculators, setCalculators] = useState(initialCalculators);
-  const [newName, setNewName] = useState("");
-  const [newRate, setNewRate] = useState(0);
-  const [position, setPosition] = useState(0);
+const AdminPanel = () => {
+  const [calculations, setCalculations] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem("calculators", JSON.stringify(calculators));
-  }, [calculators]);
+    axios.get('/admin/calculations')
+        .then(response => {
+          setCalculations(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching calculations:', error);
+        });
+  }, []);
 
-  const addCalculator = () => {
-    const newCalculator = {
-      id: Date.now(),
-      component: "Calc1",
-      name: newName,
-      rate: newRate,
-    };
-    let updatedCalculators = [...calculators];
-    updatedCalculators.splice(position, 0, newCalculator);
-    setCalculators(updatedCalculators);
-  };
-  const exportCalculations = async () => {
-    const response = await axios.get('/api/admin/export');
-    const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'calculations.csv';
-    link.click();
-  };
-
-
-  const deleteCalculator = (id) => {
-    const updatedCalculators = calculators.filter((calc) => calc.id !== id);
-    setCalculators(updatedCalculators);
-  };
-
-  const changeRate = (id, rate) => {
-    const updatedCalculators = calculators.map((calc) =>
-        calc.id === id ? { ...calc, rate } : calc
-    );
-    setCalculators(updatedCalculators);
-  };
-
-  const changeName = (id, name) => {
-    const updatedCalculators = calculators.map((calc) =>
-        calc.id === id ? { ...calc, name } : calc
-    );
-    setCalculators(updatedCalculators);
-  };
-
-  const getComponent = (componentName) => {
-    switch (componentName) {
-      case "Calc1":
-        return <Calc1 />;
-      case "Calc2":
-        return <Calc2 />;
-      case "Calc3":
-        return <Calc3 />;
-      default:
-        return null;
-    }
+  const exportData = () => {
+    window.location.href = '/admin/calculations/export';
   };
 
   return (
       <div>
-        <p className="admin">Admin Panel</p>
-        {calculators.map((calc) => (
-            <div key={calc.id}>
-              <h2>{calc.name}</h2>
-              {getComponent(calc.component)}
-              <p>Rate: {calc.rate}</p>
-              <button onClick={() => deleteCalculator(calc.id)}>Delete</button>
-              <input
-                  type="number"
-                  onChange={(e) => changeRate(calc.id, Number(e.target.value))}
-                  placeholder="New Rate"
-              />
-              <input type="text" placeholder="New Name"/>
-              <button
-                  onClick={(e) => changeName(calc.id, e.target.previousSibling.value)}
-              >
-                Change Name
-              </button>
-            </div>
-        ))}
-        <input
-            type="text"
-            onChange={(e) => setNewName(e.target.value)}
-            placeholder="Calculator Name"
-        />
-        <input
-            type="number"
-            onChange={(e) => setNewRate(Number(e.target.value))}
-            placeholder="Rate"
-        />
-        <input
-            type="number"
-            onChange={(e) => setPosition(Number(e.target.value))}
-            placeholder="Position"
-        />
-        <button onClick={addCalculator}>Add Calculator</button>
-        <button onClick={exportCalculations}>Экспортировать результаты расчетов</button>
-
+        <h1>Admin Panel</h1>
+        <button onClick={exportData}>Export Data to CSV</button>
+        <table>
+          <thead>
+          <tr>
+            <th>Email</th>
+            <th>Loan Amount</th>
+            <th>Interest Rate</th>
+            <th>Term (Years)</th>
+            <th>Monthly Payment</th>
+            <th>Total Payment</th>
+            <th>Required Income</th>
+            <th>Date</th>
+          </tr>
+          </thead>
+          <tbody>
+          {calculations.map(calc => (
+              <tr key={calc._id}>
+                <td>{calc.email}</td>
+                <td>{calc.loanAmount}</td>
+                <td>{calc.interestRate}</td>
+                <td>{calc.term}</td>
+                <td>{calc.monthlyPayment}</td>
+                <td>{calc.totalPayment}</td>
+                <td>{calc.requiredIncome}</td>
+                <td>{new Date(calc.date).toLocaleDateString()}</td>
+              </tr>
+          ))}
+          </tbody>
+        </table>
       </div>
   );
-}
+};
 
 export default AdminPanel;

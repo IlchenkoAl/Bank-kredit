@@ -5,6 +5,7 @@ import Login from "./components/adminPanel/Login";
 import Header from "./components/common/Header";
 import './components/styles/App.css'
 import Register from "./components/adminPanel/Register";
+import AdminPanel from "./components/adminPanel/AdminPanel";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<AdminPanel />} />
 
           </Routes>
         </div>

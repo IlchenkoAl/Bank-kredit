@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const users = require('./routes/userRoutes');
+const calculate = require('./routes/calculatorRoutes');
 const { join } = require('path');
 require('dotenv').config();
 
@@ -11,6 +12,7 @@ const port = 8000;
 app.use(express.json());
 app.use(cors());
 app.use('/users', users);
+app.use('/calculate', calculate);
 
 
 // Обработка favicon.ico

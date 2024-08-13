@@ -1,26 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {calculateLoan, setCalculatorData} from "../../store/actions/calculatorActions";
+import { setCalculatorData, calculateLoan, sendEmail } from '../../store/actions/calculatorActions';
+import EmailModal from './EmailModal';
+import './../styles/Button.css';
+import './../styles/App.css';
 
-function Calculator() {
+function Calculator({ interestRate, loanType }) {
   const dispatch = useDispatch();
   const calculator = useSelector(state => state.calculator);
-
+  const [showModal, setShowModal] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(setCalculatorData({ [name]: Number(value) }));
   };
 
   const handleCalculate = () => {
+    // Устанавливаем процентную ставку и тип кредита в состояние перед расчетом
+    dispatch(setCalculatorData({ interestRate, loanType }));
     dispatch(calculateLoan());
+  };
+
+  const handleSendEmail = (email) => {
+    dispatch(sendEmail(email));
   };
 
   return (
       <div>
         <div className="kredit">
-          <h1 style={{fontSize:'35px', textAlign:'center'}}>
-            {calculator.loanType} <br />
-            Процентная ставка <strong style={{fontSize:'55px'}}>{calculator.interestRate} </strong>(%)
+          <h1 style={{fontSize: '35px', textAlign: 'center'}}>
+            Процентная ставка на {loanType} <strong style={{fontSize: '55px'}}>{interestRate} </strong>(%)
           </h1>
         </div>
         <div className="Calc">
@@ -83,7 +91,7 @@ function Calculator() {
             </div>
             <div className="div2">
               <input
-                  style={{border: '1px solid black'}}
+                  style={{ border: '1px solid black' }}
                   type="number"
                   name="initialPayment"
                   value={calculator.initialPayment === 0 ? '' : calculator.initialPayment}
@@ -93,24 +101,41 @@ function Calculator() {
             </div>
             <div className="info-value-block">
               <div className="info-value grey">
-                Ежемесячный платеж <br/> <strong>{calculator.monthlyPayment}</strong> ₽
+                Ежемесячный платеж <br /> <strong>{calculator.monthlyPayment.toLocaleString()}</strong> ₽
               </div>
               <div className="info-value blue">
-                Общая сумма выплат <br/> <strong>{calculator.totalPayment}</strong> ₽
+                Общая сумма выплат <br /> <strong>{calculator.totalPayment.toLocaleString()}</strong> ₽
               </div>
               <div className="info-value green">
-                Необходимый доход <br/> <strong>{calculator.requiredIncome}</strong> ₽
+                Необходимый доход <br /> <strong>{calculator.requiredIncome.toLocaleString()}</strong> ₽
               </div>
             </div>
             <button
                 className="styleButton"
                 onClick={handleCalculate}
-                disabled={calculator.cost <= 0 || calculator.initialPayment <= 0 }
+                disabled={calculator.cost <= 0 || calculator.initialPayment <= 0 || calculator.term <= 0}
             >
               Рассчитать
             </button>
+            <br/>
+            <button
+                className="styleButton"
+                onClick={() => setShowModal(true)}
+            >
+              Отправить результаты на почту
+            </button>
           </div>
         </div>
+
+        {/* Модальное окно для отправки email */}
+        <EmailModal
+            show={showModal}
+            onClose={() => setShowModal(false)}
+            onSend={handleSendEmail}
+            isSending={calculator.emailSending}
+            isSent={calculator.emailSent}
+            error={calculator.error}
+        />
       </div>
   );
 }
