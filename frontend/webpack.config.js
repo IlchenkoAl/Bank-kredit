@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -7,7 +8,7 @@ module.exports = {
         filename: 'main.js',
         clean: true,
     },
-    mode: 'production',
+    mode: 'development', // Для разработки
     module: {
         rules: [
             {
@@ -21,7 +22,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.css$/, // Новое правило для обработки CSS-файлов
+                test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
             },
         ],
@@ -29,6 +30,11 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './public/index.html', // Указываем путь к шаблону
+        }),
+    ],
     devServer: {
         static: {
             directory: path.join(__dirname, 'public'),
