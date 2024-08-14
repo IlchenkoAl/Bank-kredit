@@ -17,11 +17,6 @@ app.use('/calculate', calculate);
 app.use('/admin', adminRoutes);
 
 
-// Обработка favicon.ico
-app.get('/favicon.ico', (req, res) => {
-    res.sendFile(join(__dirname, 'public', 'favicon.ico'));
-});
-
 // Обработка корневого маршрута
 app.get('/', (req, res) => {
     res.send('Добро пожаловать в калькулятор!');
