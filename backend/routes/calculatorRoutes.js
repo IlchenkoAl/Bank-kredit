@@ -79,8 +79,8 @@ router.post('/send', async (req, res) => {
     let transporter = createTransport({
         service: 'gmail', // Например, используем Gmail, можно выбрать другой SMTP-сервис
         auth: {
-            user: process.env.EMAIL_USER, // Ваша почта
-            pass: process.env.EMAIL_PASS  // Ваш пароль или App Password
+            user: '', // Ваша почта
+            pass: '' // Ваш пароль или App Password
         }
     });
 

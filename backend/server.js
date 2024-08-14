@@ -27,21 +27,17 @@ app.get('/favicon.ico', (req, res) => {
 const run = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL);
-        console.log('Mongo  DB connected');
+        console.log('MongoDB connected');
+
 
         app.listen(port, () => {
             console.log(`Сервер запущен на порту ${port}!`);
         });
-        process.on('exit', () => {
-            mongoose.disconnect();
-        });
     } catch (error) {
         console.error('Ошибка при инициализации:', error);
-        process.exit(1);
-        await mongoose.disconnect();
+        process.exit(1); // Завершить процесс с кодом ошибки
     }
 };
-
 run().then();
 
 module.exports = app;
