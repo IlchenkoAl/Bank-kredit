@@ -21,9 +21,7 @@ app.use('/admin', adminRoutes);
 app.get('/', (req, res) => {
     res.send('Добро пожаловать в калькулятор!');
 });
-app.get('/favicon.ico', (req, res) => {
-    res.sendFile(join(__dirname, 'public', 'favicon.ico'));
-});
+
 const run = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL);
