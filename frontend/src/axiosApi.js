@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 const axiosApi = axios.create({
-    baseURL: 'https://bank-kredit.vercel.app/',
+    baseURL: '',
 });
 export default axiosApi;

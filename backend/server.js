@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const users = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const calculate = require('./routes/calculatorRoutes');
-const { join } = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -25,7 +24,7 @@ app.get('/', (req, res) => {
 const run = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL);
-        console.log('MongoDB connected');
+        console.log('Mongo  DB connected');
 
         app.listen(port, () => {
             console.log(`Сервер запущен на порту ${port}!`);
