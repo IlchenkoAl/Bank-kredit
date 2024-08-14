@@ -8,7 +8,7 @@ const { join } = require('path');
 require('dotenv').config();
 
 const app = express();
-const port = 8000;
+const port = 'https://bank-kredit.vercel.app' || 8000;
 
 app.use(express.json());
 app.use(cors());
