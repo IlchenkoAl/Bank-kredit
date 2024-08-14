@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "vercel-build": "node index.js"
+    "dev": "nodemon index.js"
   },
   "author": "Martin13025",
   "license": "ISC",
