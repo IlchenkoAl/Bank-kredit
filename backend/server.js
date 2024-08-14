@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const users = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const calculate = require('./routes/calculatorRoutes');
+const {join} = require("path");
 require('dotenv').config();
 
 const app = express();
@@ -20,7 +21,9 @@ app.use('/admin', adminRoutes);
 app.get('/', (req, res) => {
     res.send('Добро пожаловать в калькулятор!');
 });
-
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(join(__dirname, 'public', 'favicon.ico'));
+});
 const run = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL);
