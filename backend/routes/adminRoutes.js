@@ -10,7 +10,6 @@ router.get('/calculators', async (req, res) => {
             message: 'Calculations retrieved successfully',
             data: calculations
         });
-        console.log(calculations)
     } catch (error) {
         console.error('Error while retrieving calculations:', error);
         res.status(500).send('Ошибка при получении расчетов');
@@ -43,19 +42,38 @@ router.get('/export', async (req, res) => {
     }
 });
 router.post('/create', async (req, res) => {
-    const { type, cost, initialPayment, term, interestRate, monthlyPayment, totalPayment, requiredIncome } = req.body;
+    const { type, cost, initialPayment, term, interestRate } = req.body;
 
     if (!type || !cost || !initialPayment || !term || !interestRate) {
         return res.status(400).json({ error: 'Все поля обязательны' });
     }
 
     try {
+        // Рассчитываем сумму кредита
+        const loanAmount = cost - initialPayment;
+
+        // Рассчитываем ежемесячную процентную ставку
+        const monthlyRate = interestRate / 12 / 100;
+
+        // Рассчитываем общую ставку
+        const totalRate = Math.pow(1 + monthlyRate, term * 12);
+
+        // Рассчитываем ежемесячный платеж
+        const monthlyPayment = (loanAmount * monthlyRate * totalRate) / (totalRate - 1);
+
+        // Рассчитываем общую сумму выплат
+        const totalPayment = monthlyPayment * term * 12;
+
+        // Рассчитываем необходимый доход для получения кредита
+        const requiredIncome = monthlyPayment * 2.5;
+
         const calculation = new Calculation({
             type,
             cost,
             initialPayment,
             term,
             interestRate,
+            loanAmount: Math.round(loanAmount),
             monthlyPayment: Math.round(monthlyPayment),
             totalPayment: Math.round(totalPayment),
             requiredIncome: Math.round(requiredIncome),
@@ -72,7 +90,6 @@ router.post('/create', async (req, res) => {
         res.status(500).send('Ошибка при создании записи');
     }
 });
-
 // Маршрут для редактирования существующей записи
 router.put('/edit/:id', async (req, res) => {
     const { id } = req.params;

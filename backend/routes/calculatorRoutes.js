@@ -73,7 +73,6 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/send', async (req, res) => {
-    console.log('send')
     const { email, monthlyPayment, totalPayment, requiredIncome } = req.body;
 
     // Настройка транспорта для отправки почты
