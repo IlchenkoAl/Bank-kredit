@@ -3,10 +3,11 @@ const Calculation = require('./../models/Calculation');
 const {createTransport} = require("nodemailer");
 const router = express.Router();
 
+
+
 router.post('/', async (req, res) => {
     const { type, cost, initialPayment, term, interestRate } = req.body;
 
-    console.log('Received data:', req.body);
 
     // Проверка наличия обязательных полей
     if (!type || !cost || !initialPayment || !term || !interestRate) {
@@ -15,7 +16,6 @@ router.post('/', async (req, res) => {
 
     // Рассчитываем сумму кредита
     const loanAmount = cost - initialPayment;
-    console.log('Calculated loanAmount:', loanAmount);
 
     // Проверка на корректность суммы кредита
     if (isNaN(loanAmount) || loanAmount <= 0) {
@@ -24,15 +24,12 @@ router.post('/', async (req, res) => {
 
     // Рассчитываем ежемесячную процентную ставку
     const monthlyRate = interestRate / 12 / 100;
-    console.log('Calculated monthlyRate:', monthlyRate);
 
     // Рассчитываем общую ставку
     const totalRate = Math.pow(1 + monthlyRate, term * 12);
-    console.log('Calculated totalRate:', totalRate);
 
     // Рассчитываем ежемесячный платеж
     const monthlyPayment = (loanAmount * monthlyRate * totalRate) / (totalRate - 1);
-    console.log('Calculated monthlyPayment:', monthlyPayment);
 
     // Проверка на корректность ежемесячного платежа
     if (isNaN(monthlyPayment) || monthlyPayment <= 0) {
@@ -41,11 +38,9 @@ router.post('/', async (req, res) => {
 
     // Рассчитываем общую сумму выплат
     const totalPayment = monthlyPayment * term * 12;
-    console.log('Calculated totalPayment:', totalPayment);
 
     // Рассчитываем необходимый доход для получения кредита
     const requiredIncome = monthlyPayment * 2.5;
-    console.log('Calculated requiredIncome:', requiredIncome);
 
     try {
         // Округляем все значения перед сохранением

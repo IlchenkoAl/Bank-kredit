@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCalculatorData, calculateLoan, sendEmail } from '../../store/actions/calculatorActions';
 import EmailModal from './EmailModal';
 import './../styles/Button.css';
 import './../styles/App.css';
+import { calculateLoan, sendEmail, setCalculatorData } from "../../store/actions/calculatorActions";
 
 function Calculator({ interestRate, loanType }) {
   const dispatch = useDispatch();
   const calculator = useSelector(state => state.calculator);
   const [showModal, setShowModal] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(setCalculatorData({ [name]: Number(value) }));
@@ -27,8 +28,8 @@ function Calculator({ interestRate, loanType }) {
   return (
       <div>
         <div className="kredit">
-          <h1 style={{fontSize: '35px', textAlign: 'center'}}>
-            Процентная ставка на {loanType} <strong style={{fontSize: '55px'}}>{interestRate} </strong>(%)
+          <h1 style={{ fontSize: '35px', textAlign: 'center' }}>
+            Процентная ставка {loanType} <strong style={{ fontSize: '55px' }}>{interestRate} </strong>(%)
           </h1>
         </div>
         <div className="Calc">
@@ -101,13 +102,13 @@ function Calculator({ interestRate, loanType }) {
             </div>
             <div className="info-value-block">
               <div className="info-value grey">
-                Ежемесячный платеж <br /> <strong>{calculator.monthlyPayment.toLocaleString()}</strong> ₽
+                Ежемесячный платеж <br /> <strong>{calculator.monthlyPayment ? calculator.monthlyPayment.toLocaleString() : '0'}</strong> ₽
               </div>
               <div className="info-value blue">
-                Общая сумма выплат <br /> <strong>{calculator.totalPayment.toLocaleString()}</strong> ₽
+                Общая сумма выплат <br /> <strong>{calculator.totalPayment ? calculator.totalPayment.toLocaleString() : '0'}</strong> ₽
               </div>
               <div className="info-value green">
-                Необходимый доход <br /> <strong>{calculator.requiredIncome.toLocaleString()}</strong> ₽
+                Необходимый доход <br /> <strong>{calculator.requiredIncome ? calculator.requiredIncome.toLocaleString() : '0'}</strong> ₽
               </div>
             </div>
             <button
@@ -117,7 +118,7 @@ function Calculator({ interestRate, loanType }) {
             >
               Рассчитать
             </button>
-            <br/>
+            <br />
             <button
                 className="styleButton"
                 onClick={() => setShowModal(true)}

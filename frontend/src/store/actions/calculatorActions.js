@@ -1,10 +1,12 @@
 import axiosApi from "../../axiosApi";
-export const SET_CALCULATOR_DATA = 'SET_CALCULATOR_DATA';
-export const CALCULATE_LOAN_SUCCESS = 'CALCULATE_LOAN_SUCCESS';
-export const CALCULATE_LOAN_FAILURE = 'CALCULATE_LOAN_FAILURE';
-export const SEND_EMAIL_REQUEST = 'SEND_EMAIL_REQUEST';
-export const SEND_EMAIL_SUCCESS = 'SEND_EMAIL_SUCCESS';
-export const SEND_EMAIL_FAILURE = 'SEND_EMAIL_FAILURE';
+import {
+    CALCULATE_LOAN_FAILURE,
+    CALCULATE_LOAN_SUCCESS, SEND_EMAIL_FAILURE,
+    SEND_EMAIL_REQUEST,
+    SEND_EMAIL_SUCCESS,
+    SET_CALCULATOR_DATA
+} from "../actionTypes";
+
 
 export const setCalculatorData = (data) => {
     return {
@@ -12,7 +14,6 @@ export const setCalculatorData = (data) => {
         payload: data
     };
 };
-
 export const calculateLoan = () => async (dispatch, getState) => {
     const { cost, initialPayment, term, interestRate, loanType } = getState().calculator;
 

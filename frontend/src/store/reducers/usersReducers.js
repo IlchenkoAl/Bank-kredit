@@ -9,7 +9,7 @@ import {
     LOGIN_USER_SUCCESS,
     LOGOUT_USER,
 
-} from "../actions/usersActions";
+} from "../actionTypes";
 
 export const initialState = {
     user: null,

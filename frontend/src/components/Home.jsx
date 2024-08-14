@@ -8,13 +8,13 @@ function Home() {
     const renderCalculator = () => {
         switch (activeCalculator) {
             case "mortgage":
-                return <Calculator interestRate={9.6} loanType="ипотеку" />;
+                return <Calculator interestRate={9.6} loanType="на ипотеку" />;
             case "car":
-                return <Calculator interestRate={3.5} loanType="автокредит" />;
+                return <Calculator interestRate={3.5} loanType="на автокредит" />;
             case "consumer":
-                return <Calculator interestRate={14.5} loanType="потребительский кредит" />;
+                return <Calculator interestRate={14.5} loanType="на потребительский кредит" />;
             default:
-                return <Calculator interestRate={9.6} loanType="ипотеку" />;
+                return <Calculator interestRate={9.6} loanType="на ипотеку" />;
         }
     };
 

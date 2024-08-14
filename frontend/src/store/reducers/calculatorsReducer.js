@@ -1,63 +1,31 @@
-import {
-    CALCULATE_LOAN_FAILURE,
-    CALCULATE_LOAN_SUCCESS, SEND_EMAIL_FAILURE,
-    SEND_EMAIL_REQUEST, SEND_EMAIL_SUCCESS,
-    SET_CALCULATOR_DATA
-} from "../actions/calculatorActions";
+import {CREATE_CALCULATION_SUCCESS,
+    DELETE_CALCULATION_SUCCESS,
+    EDIT_CALCULATION_SUCCESS} from '../actionTypes';
 
 const initialState = {
-    cost: 0,
-    initialPayment: 0,
-    term: 0,
-    interestRate: 9.6,
-    monthlyPayment: 0,
-    totalPayment: 0,
-    requiredIncome: 0,
+    calculations: [],
+    loadingCalculations: false,
     error: null,
-    emailSending: false,
-    emailSent: false
 };
 
 export const calculatorReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_CALCULATOR_DATA:
+        case CREATE_CALCULATION_SUCCESS:
             return {
                 ...state,
-                ...action.payload
+                calculations: [...state.calculations, action.payload]
             };
-        case CALCULATE_LOAN_SUCCESS:
+        case EDIT_CALCULATION_SUCCESS:
             return {
                 ...state,
-                monthlyPayment: action.payload.monthlyPayment.toString(),
-                totalPayment: action.payload.totalPayment.toString(),
-                requiredIncome: action.payload.requiredIncome.toString(),
-                error: null
+                calculations: state.calculations.map(calc =>
+                    calc._id === action.payload._id ? action.payload : calc
+                )
             };
-        case CALCULATE_LOAN_FAILURE:
+        case DELETE_CALCULATION_SUCCESS:
             return {
                 ...state,
-                error: action.payload
-            };
-        case SEND_EMAIL_REQUEST:
-            return {
-                ...state,
-                emailSending: true,
-                emailSent: false,
-                error: null
-            };
-        case SEND_EMAIL_SUCCESS:
-            return {
-                ...state,
-                emailSending: false,
-                emailSent: true,
-                error: null
-            };
-        case SEND_EMAIL_FAILURE:
-            return {
-                ...state,
-                emailSending: false,
-                emailSent: false,
-                error: action.payload
+                calculations: state.calculations.filter(calc => calc._id !== action.payload)
             };
         default:
             return state;

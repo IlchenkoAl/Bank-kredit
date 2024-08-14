@@ -1,57 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCalculations, deleteCalculation } from "../../store/actions/adminActions";
+import CalculationForm from './../calculators/CalculationForm';
+import './../styles/AdminPanel.css';
 
 const AdminPanel = () => {
-  const [calculations, setCalculations] = useState([]);
+    const dispatch = useDispatch();
+    const { calculations, loadingCalculations, error } = useSelector(state => state.admin);
+    const [currentCalculation, setCurrentCalculation] = useState(null);
 
-  useEffect(() => {
-    axios.get('/admin/calculations')
-        .then(response => {
-          setCalculations(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching calculations:', error);
-        });
-  }, []);
+    useEffect(() => {
+        dispatch(fetchCalculations());
+    }, [dispatch]);
 
-  const exportData = () => {
-    window.location.href = '/admin/calculations/export';
-  };
+    const handleDelete = (id) => {
+        dispatch(deleteCalculation(id));
+    };
 
-  return (
-      <div>
-        <h1>Admin Panel</h1>
-        <button onClick={exportData}>Export Data to CSV</button>
-        <table>
-          <thead>
-          <tr>
-            <th>Email</th>
-            <th>Loan Amount</th>
-            <th>Interest Rate</th>
-            <th>Term (Years)</th>
-            <th>Monthly Payment</th>
-            <th>Total Payment</th>
-            <th>Required Income</th>
-            <th>Date</th>
-          </tr>
-          </thead>
-          <tbody>
-          {calculations.map(calc => (
-              <tr key={calc._id}>
-                <td>{calc.email}</td>
-                <td>{calc.loanAmount}</td>
-                <td>{calc.interestRate}</td>
-                <td>{calc.term}</td>
-                <td>{calc.monthlyPayment}</td>
-                <td>{calc.totalPayment}</td>
-                <td>{calc.requiredIncome}</td>
-                <td>{new Date(calc.date).toLocaleDateString()}</td>
-              </tr>
-          ))}
-          </tbody>
-        </table>
-      </div>
-  );
-};
+    return (
+        <div className="admin-panel">
+            <h2>Управление расчетами</h2>
+            <CalculationForm currentCalculation={currentCalculation} setCurrentCalculation={setCurrentCalculation} />
+            {loadingCalculations && <p>Загрузка расчетов...</p>}
+            {error && <p>Ошибка: {error}</p>}
+            <ul>
+                {calculations && calculations.map((calculation, index) => (
+                    <li key={index}>
+                        <p><strong>Тип кредита:</strong> {calculation.type}</p>
+                        <p><strong>Сумма кредита:</strong> {calculation.cost}</p>
+                        <p><strong>Первоначальный взнос:</strong> {calculation.initialPayment}</p>
+                        <p><strong>Срок кредита:</strong> {calculation.term}</p>
+                        <p><strong>Процентная ставка:</strong> {calculation.interestRate}%</p>
+                        <button onClick={() => handleDelete(calculation._id)} className="delete-button">Удалить</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
 
 export default AdminPanel;
