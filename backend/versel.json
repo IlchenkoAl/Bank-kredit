@@ -8,13 +8,16 @@
   ],
   "routes": [
     {
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/public/favicon.ico"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/server.js"
+      "dest": "/index.js"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "MONGO_URL": "mongodb+srv://mamzigran:9fAOhC9aT2zMkQaw@cluster0.xnmipzn.mongodb.net/calculator?retryWrites=true&w=majority&appName=Cluster0"
-
-  }
+  ]
 }
