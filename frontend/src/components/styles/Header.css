@@ -34,3 +34,18 @@
   color: #ecf0f1; /* Легкий оттенок при наведении */
 }
 
+git filter-branch --env-filter '
+OLD_EMAIL="mikhail.merkulov.89@internet.ru"
+CORRECT_NAME="IlchenkoAl"
+CORRECT_EMAIL="alex19an@yandex.ru"
+if [ "$GIT_COMMITTER_EMAIL" = "mikhail.merkulov.89@internet.ru" ]
+then
+export GIT_COMMITTER_NAME="IlchenkoAl"
+export GIT_COMMITTER_EMAIL="alex19an@yandex.ru"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "mikhail.merkulov.89@internet.ru" ]
+then
+export GIT_AUTHOR_NAME="IlchenkoAl"
+export GIT_AUTHOR_EMAIL="alex19an@yandex.ru"
+fi
+' --tag-name-filter cat -- --branches --tags
